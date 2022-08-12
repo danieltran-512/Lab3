@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
@@ -7,7 +7,10 @@ export function withRouter(Children){
   return(props)=>{
 
      const match  = {params: useParams()};
-     return <Children {...props}  match = {match}/>
+
+     const navigate = useNavigate();
+
+     return <Children {...props}  match = {match} navigate={navigate}/>
  }
 }
 
@@ -40,7 +43,7 @@ class UpdateBookInfo extends Component {
         })
       })
       .catch(err => {
-        console.log("Error from UpdateBookInfo");
+        console.log("Error from UpdateBookInfo", err);
       })
   };
 
@@ -63,10 +66,10 @@ class UpdateBookInfo extends Component {
     axios
       .put('http://localhost:8082/api/books/'+this.props.match.params.id, data)
       .then(res => {
-        this.props.history.push('/show-book/'+this.props.match.params.id);
+        this.props.navigate('/show-book/'+this.props.match.params.id);
       })
       .catch(err => {
-        console.log("Error in UpdateBookInfo!");
+        console.log("Error in UpdateBookInfo!", err);
       })
   };
 
