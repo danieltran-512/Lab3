@@ -1,0 +1,6 @@
+{
+    "mongoURI":
+      "mongodb+srv://danieltran:Daniel123@cluster0.kvm1swm.mongodb.net/?retryWrites=true&w=majority",
+    "NODE_ENV":
+      "development"
+}
