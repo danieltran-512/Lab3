@@ -34,7 +34,7 @@ class CreateBook extends Component {
     };
 
     axios
-      .post('https://evening-island-00479.herokuapp.com/api/books', data)
+      .post("https://evening-island-00479.herokuapp.com/api/books", data)
       .then(res => {
         this.setState({
           title: '',
@@ -47,7 +47,7 @@ class CreateBook extends Component {
         this.props.history.push('/');
       })
       .catch(err => {
-        console.log("Error in CreateBook!");
+        console.log("Error in CreateBook!", err);
       })
   };
 
