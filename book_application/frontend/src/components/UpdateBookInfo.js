@@ -64,7 +64,7 @@ class UpdateBookInfo extends Component {
     };
 
     axios
-      .put('http://localhost:5500/api/books/'+this.props.match.params.id, data)
+      .put('https://evening-island-00479.herokuapp.com/api/books/'+this.props.match.params.id, data)
       .then(res => {
         this.props.navigate('/show-book/'+this.props.match.params.id);
       })

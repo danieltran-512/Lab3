@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
 
+export function withRouter(Children){
+  return(props)=>{
+
+     const match  = {params: useParams()};
+
+     const navigate = useNavigate();
+
+     return <Children {...props}  match = {match} navigate={navigate}/>
+ }
+}
 
 class CreateBook extends Component {
   constructor() {
@@ -44,7 +54,7 @@ class CreateBook extends Component {
           published_date:'',
           publisher:''
         })
-        this.props.history.push('/');
+        this.props.navigate('/');
       })
       .catch(err => {
         console.log("Error in CreateBook!", err);
@@ -68,7 +78,7 @@ class CreateBook extends Component {
                   Create new book
               </p>
 
-              <form noValidate onSubmit={this.onSubmit}>
+              <form onSubmit={this.onSubmit}>
                 <div className='form-group'>
                   <input
                     type='text'
@@ -77,6 +87,7 @@ class CreateBook extends Component {
                     className='form-control'
                     value={this.state.title}
                     onChange={this.onChange}
+                    required
                   />
                 </div>
                 <br />
@@ -89,6 +100,7 @@ class CreateBook extends Component {
                     className='form-control'
                     value={this.state.isbn}
                     onChange={this.onChange}
+                    required
                   />
                 </div>
 
@@ -100,6 +112,7 @@ class CreateBook extends Component {
                     className='form-control'
                     value={this.state.author}
                     onChange={this.onChange}
+                    required
                   />
                 </div>
 
@@ -111,6 +124,7 @@ class CreateBook extends Component {
                     className='form-control'
                     value={this.state.description}
                     onChange={this.onChange}
+                    required
                   />
                 </div>
 
@@ -122,6 +136,7 @@ class CreateBook extends Component {
                     className='form-control'
                     value={this.state.published_date}
                     onChange={this.onChange}
+                    required
                   />
                 </div>
                 <div className='form-group'>
@@ -132,6 +147,7 @@ class CreateBook extends Component {
                     className='form-control'
                     value={this.state.publisher}
                     onChange={this.onChange}
+                    required
                   />
                 </div>
 
@@ -148,4 +164,4 @@ class CreateBook extends Component {
   }
 }
 
-export default CreateBook;
+export default withRouter(CreateBook);

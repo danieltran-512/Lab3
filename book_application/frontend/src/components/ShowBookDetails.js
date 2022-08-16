@@ -1,13 +1,17 @@
 import React from 'react';
-import { Link , useParams } from 'react-router-dom';
+import { Link , useParams, useNavigate } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+
 
 export function withRouter(Children){
   return(props)=>{
 
      const match  = {params: useParams()};
-     return <Children {...props}  match = {match}/>
+
+     const navigate = useNavigate();
+
+     return <Children {...props}  match = {match} navigate={navigate}/>
  }
 }
 
@@ -38,7 +42,7 @@ class showBookDetails extends React.Component {
     axios
       .delete('https://evening-island-00479.herokuapp.com/api/books/'+id)
       .then(res => {
-        this.props.history.push("/");
+        this.props.navigate("/");
       })
       .catch(err => {
         console.log("Error form ShowBookDetails_deleteClick");
