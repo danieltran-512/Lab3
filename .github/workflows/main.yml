@@ -17,4 +17,3 @@ jobs:
           heroku_app_name: "evening-island-00479" 
           heroku_email: "danieltran512000@gmail.com"
           appdir: "book_application" 
-          procfile: "web: node app.js"
